@@ -22,7 +22,7 @@ Route::get('/test/{getTest}', [TestController::class, 'getTestData']);
 
 Route::get('/students/{getStudent}', [StudentController::class, 'getStudentData']);
 
-Route::get('/students/{saveStudent}', [StudentController::class, 'saveStudentData']);
+Route::post('/students/{saveStudent}', [StudentController::class, 'saveStudentData']);
 
 
 
