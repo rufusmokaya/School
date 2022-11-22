@@ -113,30 +113,30 @@ Ext.define('School.view.student.StudentListController', {
         });
     },
 
-    // onRemoveClick: function (sender, record) {
-    //     var studentGrid = this.getView();
-    //     var studentStore = studentGrid.getStore();
-    //     var selectedRows = studentGrid.getSelectionModel().getSelection()[0];
-    //     studentStore.remove(selectedRows);
-
-    //     //var row = studentGrid.store.indexOf(selectedRows)
-
-    //     console.log(selectedRows);
-    //     //studentStore.
-    // },
-    
     onRemoveClick: function (sender, record) {
-        var me = this,
-        selectedRows = me.getView();
+        var studentGrid = this.getView();
+        var studentStore = studentGrid.getStore();
+        var selectedRows = studentGrid.getSelectionModel().getSelection()[0];
+        studentStore.remove(selectedRows);
 
-        if (!selectedRows.getValues(false, false, false, true).Id) {
+        //var row = studentGrid.store.indexOf(selectedRows)
+
+        console.log(selectedRows);
+        //studentStore.
+    },
+    
+    onDeleteClick: function (sender, record) {
+        var me = this,
+            studentForm = me.getView();
+
+        if (!studentGrid.getValues(false, false, false, true).Id) {
             Ext.Msg.alert('Status', 'Invalid or No data to delete.');
             return;
         }
 
         var student = Ext.create('School.model.Student'), data;
 
-        student.set(selectedRows.getValues());
+        student.set(studentGrid.getValues());
         data = student.getData();
 
         Ext.Msg.show({
@@ -149,7 +149,7 @@ Ext.define('School.view.student.StudentListController', {
             fn: function (buttonValue, inputText, showConfig) {
                 if (buttonValue === 'yes') {
 
-                    selectedRows.submit({
+                    studentForm.submit({
                         url: 'http://localhost:8080/School/students/saveStudent',
                         method: 'DELETE',
                         clientValidation: true,
@@ -162,7 +162,7 @@ Ext.define('School.view.student.StudentListController', {
                         success: function (form, action) {
                             try {
                                 var resp = Ext.decode(action.response.responseText);
-                                selectedRows.clearForm();
+                                studentForm.clearForm();
 
                                 Ext.Msg.alert('Success', resp.message);
                             }
