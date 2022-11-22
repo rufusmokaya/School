@@ -14,7 +14,7 @@ Ext.define('School.view.student.StudentViewModel', {
                     rootProperty: 'data',
                     type: 'json'
                 },
-                url: '/api/student',
+                url: 'http://localhost:8080/School/students/getStudent',
                 writer: {
                     type: 'json',
                     dateFormat: 'd/m/Y',
@@ -35,7 +35,7 @@ Ext.define('School.view.student.StudentViewModel', {
                    type: 'json',
                    totalProperty: 'TotalCount'
                },
-               url: '/api/student'
+               url: 'http://localhost:8080/School/students/getStudent'
            }
         }
 

@@ -49,7 +49,7 @@ Ext.define('School.view.student.StudentFormController', {
             }
         });
     },
-
+    // moveToGrid: function()
     onReadClick: function (sender, record) {
         var studentForm = this.getView().getForm();
 
@@ -83,124 +83,124 @@ Ext.define('School.view.student.StudentFormController', {
         });
     },
 
-    onUpdateClick: function (sender, record) {
-        var studentForm = this.getView().getForm();
+    // onUpdateClick: function (sender, record) {
+    //     var studentForm = this.getView().getForm();
 
-        if (!studentForm.isDirty()) {
-            Ext.Msg.alert('Status', 'No pending changes to save.');
-            return;
-        }
-        else if (!studentForm.isValid()) {
-            Ext.Msg.alert('Status', 'Invalid data.');
-            return;
-        }
+    //     if (!studentForm.isDirty()) {
+    //         Ext.Msg.alert('Status', 'No pending changes to save.');
+    //         return;
+    //     }
+    //     else if (!studentForm.isValid()) {
+    //         Ext.Msg.alert('Status', 'Invalid data.');
+    //         return;
+    //     }
 
-        studentForm.submit({
-            url: 'http://localhost:8080/School/students/saveStudent',
-            waitMsg: 'Updating..',
-            method: 'PUT',
-            headers:
-            {
-                'Content-Type': 'application/json'
-            },
-            clientValidation: true,
-            success: function (form, action) {
-                try {
-                    var student = Ext.create('School.model.Student');
-                    var resp = Ext.decode(action.response.responseText);
+    //     studentForm.submit({
+    //         url: 'http://localhost:8080/School/students/saveStudent',
+    //         waitMsg: 'Updating..',
+    //         method: 'PUT',
+    //         headers:
+    //         {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         clientValidation: true,
+    //         success: function (form, action) {
+    //             try {
+    //                 var student = Ext.create('School.model.Student');
+    //                 var resp = Ext.decode(action.response.responseText);
 
-                    if (resp.data.length > 0) {
-                        // addstudent returns student model with Id so we can re-load model into form so form will have isDirty false
-                        student.set(resp.data[0]);
-                        studentForm.loadRecord(student);
-                    }
+    //                 if (resp.data.length > 0) {
+    //                     // addstudent returns student model with Id so we can re-load model into form so form will have isDirty false
+    //                     student.set(resp.data[0]);
+    //                     studentForm.loadRecord(student);
+    //                 }
 
-                    Ext.Msg.alert('Status', 'Saved successfully.');
-                }
-                catch (ex) {
-                    Ext.Msg.alert('Status', 'Exception: ' + ex.Message);
+    //                 Ext.Msg.alert('Status', 'Saved successfully.');
+    //             }
+    //             catch (ex) {
+    //                 Ext.Msg.alert('Status', 'Exception: ' + ex.Message);
 
-                }
-            },
-            failure: function (form, action) {
-                if (action.failureType === Ext.form.action.Action.CLIENT_INVALID) {
-                    Ext.Msg.alert('CLIENT_INVALID', 'Something has been missed. Please check and try again.');
-                }
-                if (action.failureType === Ext.form.action.Action.CONNECT_FAILURE) {
-                    Ext.Msg.alert('CONNECT_FAILURE', 'Status: ' + action.response.status + ': ' + action.response.statusText);
-                }
-                if (action.failureType === Ext.form.action.Action.SERVER_INVALID) {
-                    Ext.Msg.alert('SERVER_INVALID', action.result.message);
-                }
-            }
-        });
-    },
-    onDeleteClick: function (sender, record) {
-        var me = this,
-            studentForm = me.getView();
+    //             }
+    //         },
+    //         failure: function (form, action) {
+    //             if (action.failureType === Ext.form.action.Action.CLIENT_INVALID) {
+    //                 Ext.Msg.alert('CLIENT_INVALID', 'Something has been missed. Please check and try again.');
+    //             }
+    //             if (action.failureType === Ext.form.action.Action.CONNECT_FAILURE) {
+    //                 Ext.Msg.alert('CONNECT_FAILURE', 'Status: ' + action.response.status + ': ' + action.response.statusText);
+    //             }
+    //             if (action.failureType === Ext.form.action.Action.SERVER_INVALID) {
+    //                 Ext.Msg.alert('SERVER_INVALID', action.result.message);
+    //             }
+    //         }
+    //     });
+    // },
+    // onDeleteClick: function (sender, record) {
+    //     var me = this,
+    //         studentForm = me.getView();
 
-        if (!studentForm.getValues(false, false, false, true).Id) {
-            Ext.Msg.alert('Status', 'Invalid or No data to delete.');
-            return;
-        }
+    //     if (!studentForm.getValues(false, false, false, true).Id) {
+    //         Ext.Msg.alert('Status', 'Invalid or No data to delete.');
+    //         return;
+    //     }
 
-        var student = Ext.create('School.model.Student'), data;
+    //     var student = Ext.create('School.model.Student'), data;
 
-        student.set(studentForm.getValues());
-        data = student.getData();
+    //     student.set(studentForm.getValues());
+    //     data = student.getData();
 
-        Ext.Msg.show({
-            title: 'Delete',
-            msg: 'Do you want to delete this record? ',
-            width: 300,
-            closable: false,
-            buttons: Ext.Msg.YESNO,
-            icon: Ext.Msg.QUESTION,
-            fn: function (buttonValue, inputText, showConfig) {
-                if (buttonValue === 'yes') {
+    //     Ext.Msg.show({
+    //         title: 'Delete',
+    //         msg: 'Do you want to delete this record? ',
+    //         width: 300,
+    //         closable: false,
+    //         buttons: Ext.Msg.YESNO,
+    //         icon: Ext.Msg.QUESTION,
+    //         fn: function (buttonValue, inputText, showConfig) {
+    //             if (buttonValue === 'yes') {
 
-                    studentForm.submit({
-                        url: 'http://localhost:8080/School/students/saveStudent',
-                        method: 'DELETE',
-                        clientValidation: true,
-                        waitMsg: 'Deleting..',
-                        headers:
-                        {
-                            'Content-Type': 'application/json'
-                        },
+    //                 studentForm.submit({
+    //                     url: 'http://localhost:8080/School/students/saveStudent',
+    //                     method: 'DELETE',
+    //                     clientValidation: true,
+    //                     waitMsg: 'Deleting..',
+    //                     headers:
+    //                     {
+    //                         'Content-Type': 'application/json'
+    //                     },
 
-                        success: function (form, action) {
-                            try {
-                                var resp = Ext.decode(action.response.responseText);
-                                studentForm.clearForm();
+    //                     success: function (form, action) {
+    //                         try {
+    //                             var resp = Ext.decode(action.response.responseText);
+    //                             studentForm.clearForm();
 
-                                Ext.Msg.alert('Success', resp.message);
-                            }
-                            catch (ex) {
-                                Ext.Msg.alert('Status', 'Exception: ' + ex.Message);
+    //                             Ext.Msg.alert('Success', resp.message);
+    //                         }
+    //                         catch (ex) {
+    //                             Ext.Msg.alert('Status', 'Exception: ' + ex.Message);
 
-                            }
-                        },
-                        failure: function (form, action) {
-                            if (action.failureType === Ext.form.action.Action.CLIENT_INVALID) {
-                                Ext.Msg.alert('CLIENT_INVALID', 'Something has been missed. Please check and try again.');
-                            }
-                            if (action.failureType === Ext.form.action.Action.CONNECT_FAILURE) {
-                                Ext.Msg.alert('CONNECT_FAILURE', 'Status: ' + action.response.status + ': ' + action.response.statusText);
-                            }
-                            if (action.failureType === Ext.form.action.Action.SERVER_INVALID) {
-                                Ext.Msg.alert('SERVER_INVALID', action.result.message);
-                            }
-                        }
-                    });
-                }
-            }
+    //                         }
+    //                     },
+    //                     failure: function (form, action) {
+    //                         if (action.failureType === Ext.form.action.Action.CLIENT_INVALID) {
+    //                             Ext.Msg.alert('CLIENT_INVALID', 'Something has been missed. Please check and try again.');
+    //                         }
+    //                         if (action.failureType === Ext.form.action.Action.CONNECT_FAILURE) {
+    //                             Ext.Msg.alert('CONNECT_FAILURE', 'Status: ' + action.response.status + ': ' + action.response.statusText);
+    //                         }
+    //                         if (action.failureType === Ext.form.action.Action.SERVER_INVALID) {
+    //                             Ext.Msg.alert('SERVER_INVALID', action.result.message);
+    //                         }
+    //                     }
+    //                 });
+    //             }
+    //         }
 
-        });
-    },
-    onResetClick: function (sender, record) {
-        this.getView().getForm().reset();
-    },
+    //     });
+    // },
+    // onResetClick: function (sender, record) {
+    //     this.getView().getForm().reset();
+    // },
     onClearClick: function (sender, record) {
         this.getView().clearForm();
     },

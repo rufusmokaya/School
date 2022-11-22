@@ -52,5 +52,71 @@ class StudentController extends Controller
                 'data' => $students
             ]);
         }
-    }  
+    }
+    public function show($id){
+        $studentid=Student_Model::find($id);
+        return response()->json($studentid);
+    }
+
+    public function edit($id){
+        //
+    }
+    
+    public function updateStudentData(Request $request, $id){  
+        $validator=Validator::make($request->all(),[
+            'first_name' => 'required',
+            'middle_name' => 'required',
+            'last_name' => 'required',
+            'dob' => 'required',
+            'city' => 'required',
+            'state' => 'required'
+        ]);
+        if($validator->fails())
+        {
+            $response=array('response' => $validator->messages(), 'success' => false);
+            return $response;
+        }
+        else{
+            $students = Student_Model::find($id);
+            $students->first_name = $request->input('first_name');
+            $students->middle_name = $request->input('middle_name');
+            $students->last_name = $request->input('last_name');
+            $students->dob = $request->input('dob');
+            $students->city = $request->input('city');
+            $students->state = $request->input('state');
+            $students->save();
+            echo json_encode([
+                'success' => true,
+                'data' => $students
+            ]);
+        }
+    }
+    
+    public function deleteStudentData(Request $request, $id){  
+        $validator=Validator::make($request->all(),[
+            'first_name' => 'required',
+        ]);
+        if($validator->fails())
+        {
+            $response=array('response' => $validator->messages(), 'success' => false);
+            return $response;
+        }
+        else{
+            $students = Student_Model::find($id);
+            $students->first_name = $request->input('first_name');
+            $students->middle_name = $request->input('middle_name');
+            $students->last_name = $request->input('last_name');
+            $students->dob = $request->input('dob');
+            $students->city = $request->input('city');
+            $students->state = $request->input('state');
+            $students->save();
+               
+            
+            echo json_encode([
+                'success' => true,
+                'data' => $students
+            ]);
+        }
+    }
+
 }

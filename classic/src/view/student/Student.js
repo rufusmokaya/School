@@ -93,31 +93,33 @@ Ext.define('School.view.student.Student', {
                 //     console.warn("print the form data", student.getForm().getValues())
                 // }
             },
-            {
-                text: 'Read',
-                itemId: 'btnLoad',
-                handler: 'onReadClick'
-            },
+            // {
+            //     text: 'Read',
+            //     itemId: 'btnLoad',
+            //     //handler: 'onReadClick'
+            //     handler: 'moveToGrid'
 
+            // },
+
+            // {
+            //     text: 'Update',
+            //     itemId: 'btnUpdate',
+            //     formBind: true,
+            //     handler: 'onUpdateClick'
+            // },
+            // {
+            //     text: 'Delete',
+            //     itemId: 'btnDelete',
+            //     formBind: true,
+            //     handler: 'onDeleteClick'
+            // },
+            // {
+            //     text: 'Reset',
+            //     itemId: 'btnReset',
+            //     handler: 'onResetClick'
+            // },
             {
-                text: 'Update',
-                itemId: 'btnUpdate',
-                formBind: true,
-                handler: 'onUpdateClick'
-            },
-            {
-                text: 'Delete',
-                itemId: 'btnDelete',
-                formBind: true,
-                handler: 'onDeleteClick'
-            },
-            {
-                text: 'Reset',
-                itemId: 'btnReset',
-                handler: 'onResetClick'
-            },
-            {
-                text: 'Clear',
+                text: 'Clear Form',
                 itemId: 'btnClear',
                 handler: 'onClearClick'
             }]

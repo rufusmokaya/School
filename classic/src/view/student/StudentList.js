@@ -11,16 +11,21 @@ Ext.define('School.view.student.StudentList', {
     viewModel: { type: 'studentviewmodel' },
     reference:'studentlistgrid',
     selType: 'rowmodel',
+    id : 'studentGrid',
     selModel:
-    {
-        mode: 'SINGLE'
+    {   
+        injectCheckbox: 'first',
+        checkOnly:true,
+        model:'SIMPLE',
+        type: 'checkboxmodel',
     },
     viewConfig:
     {
         stripeRows: true
     },
     listeners: {
-        selectionchange: 'onSelectionChange'
+        selectionchange: 'onSelectionChange',
+        selectionchange: 'onStudentSelectionChange'
     },
     
     initComponent: function () {
@@ -95,18 +100,41 @@ Ext.define('School.view.student.StudentList', {
                     allowBlank: true
                 }
             }],
-            tbar: [{
-                text: 'Add Student',
+            tbar: [
+            {
+                itemId: 'updateStudent',
+                text: 'Edit Student Details',
                 iconCls: 'fa fa-plus',
-                handler: 'onAddClick'
-            }, {
+                handler: 'onEditClick',
+                reference: 'btnUpdateStudent',
+                disabled: true
+            }, 
+            // {
+            //     text: 'Add Student',
+            //     iconCls: 'fa fa-plus',
+            //     handler: 'onAddClick'
+            // },
+            {
                 itemId: 'removeStudent',
-                text: 'Remove Student',
+                text: 'Delete Student Details',
                 iconCls: 'fa fa-times',
                 reference: 'btnRemoveStudent',
                 handler: 'onRemoveClick',
                 //disabled: true
-            }]
+            }],
+            // buttons: [
+            // {
+            //     text: 'Update',
+            //     itemId: 'btnUpdate',
+            //     formBind: true,
+            //     handler: 'onUpdateClick'
+            // },
+            // {
+            //     text: 'Delete',
+            //     itemId: 'btnDelete',
+            //     formBind: true,
+            //     handler: 'onDeleteClick'
+            // }]
         });
 
         this.callParent(arguments);

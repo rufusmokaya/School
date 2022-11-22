@@ -21,8 +21,9 @@ Route::get('/', function () {
 Route::get('/test/{getTest}', [TestController::class, 'getTestData']);
 
 Route::get('/students/{getStudent}', [StudentController::class, 'getStudentData']);
-
 Route::post('/students/{saveStudent}', [StudentController::class, 'saveStudentData']);
+Route::put('/students/{updateStudent}', [StudentController::class, 'updateStudentData']);
+Route::delete('/students/{deleteStudent}', [StudentController::class, 'deleteStudentData']);
 
 
 
