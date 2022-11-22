@@ -25,7 +25,7 @@ Ext.define('School.view.student.StudentList', {
     },
     listeners: {
         selectionchange: 'onSelectionChange',
-        selectionchange: 'onStudentSelectionChange'
+        selectionchnge: 'onStudentSelectionChange'
     },
     
     initComponent: function () {
