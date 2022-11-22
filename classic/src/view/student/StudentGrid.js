@@ -23,7 +23,7 @@ Ext.define('School.view.StudentGrid',
     initComponent : function(){
         Ext.apply(this, 
         {
-            store : 'School.store.StudentStore',
+            store : 'studentstore',
             
             plugins : [Ext.create('Ext.grid.plugin.RowEditing', 
             {

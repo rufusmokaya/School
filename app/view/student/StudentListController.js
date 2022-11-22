@@ -116,12 +116,29 @@ Ext.define('School.view.student.StudentListController', {
     onRemoveClick: function (sender, record) {
         var studentGrid = this.getView();
         var studentStore = studentGrid.getStore();
-        var selectedRows = studentGrid.getSelectionModel().getSelection()[0];
-        studentStore.remove(selectedRows);
+        var selectedRow = studentGrid.getSelectionModel().getSelection()[0];
+        console.log(selectedRow);
+        Ext.Ajax.request({
+            url: 'http://localhost:8080/School/students/deleteStudent',
+            params: {
+                id: selectedRow.get('id')
+            },
+       
+            success: function(response, opts) {
+                // var obj = Ext.decode(response.responseText);
+                // console.dir(obj);
+                studentStore.reload();
+            },
+       
+            failure: function(response, opts) {
+                console.log('server-side failure with status code ' + response.status);
+            }
+        });
+        // studentStore.remove(selectedRows);
 
-        //var row = studentGrid.store.indexOf(selectedRows)
+        // //var row = studentGrid.store.indexOf(selectedRows)
 
-        console.log(selectedRows);
+        // console.log(selectedRows);
         //studentStore.
     },
     
