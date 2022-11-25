@@ -4,6 +4,7 @@ var getStudent_url = 'http://localhost:8080/School/students/getStudent';
 Ext.define('School.store.Student', {
     
     extend: 'Ext.data.Store',
+    pageSize:20,
 
     requires: [
         'School.model.Student',

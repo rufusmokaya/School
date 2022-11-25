@@ -10,7 +10,7 @@ Ext.define('School.view.student.Student', {
         {
             //set jsonsubmit to true for CUD operation using form.Submit()
             jsonSubmit: true,
-            url: '/School/saveStudent',
+            //url: '/School/saveStudent',
             resizable: false,
             collapsible: false,
             bodyPadding: '5',
@@ -39,12 +39,8 @@ Ext.define('School.view.student.Student', {
                         labelAlign: 'top',
                         labelStyle: 'font-weight:bold'
                     },
-                    items: [{
-                        fieldLabel: 'Id',
-                        name: 'Id',
-                        readOnly: true,
-                        width: 55
-                    },
+                    items: [
+                    //  
                     {
                         fieldLabel: 'First Name',
                         flex: 1,
@@ -54,44 +50,49 @@ Ext.define('School.view.student.Student', {
                     },
                     {
                         name: 'middle_name',
-                        width: 150,
+                        //width: 150,
+                        flex:1,
                         margin: '0 0 0 5',
-                        fieldLabel: 'Middle Name:'
+                        fieldLabel: 'Middle Name:',
+                        allowBlank: false
                     },
                     {
                         fieldLabel: 'Last Name',
                         flex: 1,
                         margin: '0 0 0 5',
-                        name: 'last_name'
+                        name: 'last_name',
+                        allowBlank: false
                     }]
                 },
                     {
                         xtype: 'datefield',
                         fieldLabel: 'Date of Birth',
-                        name: 'dob'
+                        name: 'dob',
+                        allowBlank: false
                     },
                     {
                         xtype: 'textfield',
                         fieldLabel: 'City',
                         width: '100%',
-                        name: 'city'
+                        name: 'city',
+                        allowBlank: false
                     },
                     {
                         xtype: 'textfield',
                         fieldLabel: 'State',
                         width: '100%',
-                        name: 'state'
+                        name: 'state',
+                        allowBlank: false
                     }
             ],
             buttons: [{
                 text: 'Create',
+                id: 'btnCreate',
                 itemId: 'btnCreate',
-                formBind: true,
-                handler: 'onCreateClick'
-                // handler: function(btnCreate){
-                //     var student =this.up('form');
-                //     console.warn("print the form data", student.getForm().getValues())
-                // }
+                //formBind: true,
+                handler: 'onCreateClick',
+                tooltip: 'Make sure you have filled all the details'
+                
             },
             // {
             //     text: 'Read',
